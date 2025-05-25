@@ -1,7 +1,7 @@
 # TCL-Workshop
 VSD - TCL Workshop: Introduction to Advance Skills 
 # VSD - Tool Command Language (TCL) Workshop 
-This repository contains all the information included in the VSD TCL Workshop. This workshop helped me in learning the TCL scripting and how we to extract the information from CSV file anf the how to create and use a tool box to obtain the pre-layout timing resutls in the desired format.
+This repository contains all the information included in the VSD TCL Workshop. This workshop helped me in learning the TCL scripting and how we to extract the information from CSV file anf the how to create and use a tool box to obtain the pre-layout timing resutls in the desired format. We use Yosys tool for synthesis and OpenTimer tool for pre-layout timing purpose.
 
 ## Table of Content:
  1. Day1 : Introduction to TCL and VSDSYNTH Toolbox Usage
