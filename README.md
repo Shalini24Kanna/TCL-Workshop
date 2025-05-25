@@ -34,6 +34,36 @@ As the input and desired output format are defined, The Top-Down approach is fol
    Here format[1] is the way 'Yosys' needs / accepts for synthesis process as yosys tool can not understand the csv file and where as format[2] is a way 'OpenTimer' needs the information to process Timing Analysis.
 
 ### SubTask ONE: VSDSYNTH Toolbox Usage scenarios
+The first take is to create a `vsdsyth`, which will be the user interface tool. As this is UI, it needs to have all the information a User needs to use this TCL tool.
+To understand it in detail, it is seen in 3 different user scenarios.
+1.	When .csv file is not provided as an input.
+In this case, the user interface should understand the .csv file is missing and it should display an Error message “Please provide the .csv file”
+2.	User provided a .csv file, which doesn’t exist.
+In this case, the .csv file is there but it might not be in the current working directory. The user interface should be able to understand it and display an Error message “Cannot find the .csv file”
+3.	Type “-help” to find out usage of the tool
+When User want to find the usage of the tool `vsdsynth` -help command should display the Usage information.
+
+Below is the .csv file as an Input
+![Excel sheet](https://github.com/user-attachments/assets/19db2e03-c96b-4739-bb3d-08329c8e94a9)
+
+**LAB1**
+
+To run the `vsdsynth`
+
+Go to the directory where the file is there and in shell type `./vsdsynth`
+
+To run the `vsdsynth` permission is required. `chom -R 777 vsdsynth` is the command to give permission to execute `vsdsynth` code.
+
+In *scenario1* when no .cvs file is provided:
+![Day1 - vsdsynth csv file not provided](https://github.com/user-attachments/assets/32bdaa97-46a0-4e40-a83b-f3af18dca460)
+ 
+
+In *scenario2* when .csv file is provided doesn’t exist:
+ ![vsdsynth non existing csv file](https://github.com/user-attachments/assets/2de06eaf-aae3-4108-a457-c9227cbce6bb)
+
+In *scenario3* -help command to see user guide
+ ![vsdsynth help command](https://github.com/user-attachments/assets/a22da9f4-26d3-456d-b96c-f9d623f9e01c)
+
 
 ## 2. Day2 : Variable Creation and Processing Constraints from CSV
 ### SubTask TWO: From CSV to format[1] and SDC - variable creation
