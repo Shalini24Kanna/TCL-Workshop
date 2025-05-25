@@ -33,7 +33,10 @@ As the input and desired output format are defined, The Top-Down approach is fol
    
    Here format[1] is the way 'Yosys' needs / accepts for synthesis process as yosys tool can not understand the csv file and where as format[2] is a way 'OpenTimer' needs the information to process Timing Analysis.
 
-### SubTask ONE: VSDSYNTH Toolbox Usage scenarios
+### SubTask ONE: VSDSYNTH Toolbox Usage scenarios 
+
+(**Step1:** Create a demo called .vsdsynth and pass .csv from UNIX shell to TCL script.  )
+
 The first take is to create a `vsdsyth`, which will be the user interface tool. As this is UI, it needs to have all the information a User needs to use this TCL tool.
 To understand it in detail, it is seen in 3 different user scenarios.
 1.	When .csv file is not provided as an input.
@@ -66,6 +69,9 @@ In *scenario3* -help command to see user guide
 
 
 ## 2. Day2 : Variable Creation and Processing Constraints from CSV
+
+(**Step2:** Convert all inputs to format[1] and SDC (Synopsis Design Constraint) format, and pass to synthesis tool 'Yosys'.)
+
 ### SubTask TWO: From CSV to format[1] and SDC - variable creation
 
 
@@ -89,6 +95,9 @@ In *scenario3* -help command to see user guide
 ## 5. Day5 : Advanced Scripting Techniques and Quality of Results Generation
 ### Synthesis main file scripting and output file editing
 
+
+( **Step3:** Convert format[1] and SDC to format[2] and pass to timing tool 'OpenTimer'.)
+
 ### World of 'Procs'
 
 ### read_sdc_proc - interpret clock generation constraints
@@ -98,6 +107,9 @@ In *scenario3* -help command to see user guide
 ### Process bussed ports and configuration file creation
 
 ### Quality of Results (QOR) generation algorithm
+
+(**Step4:** Generate output report)
+
 
 ### Conclusion
  - The excel sheet is taken and processes using TCL book `vsdsynth` and obtained output in the desired format.
