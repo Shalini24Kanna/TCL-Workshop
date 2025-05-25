@@ -22,10 +22,16 @@ This repository contains all the information included in the VSD TCL Workshop. T
 #### Introduction to Sub-Task
 Here, the task is divided into sub-tasks and tools needed are defined.
 As the input and desired output format are defined, The Top-Down approach is followed.
-  Step1: Create a demo called .vsdsynth and pass .csv from UNIX shell to TCL script
-  Step2: Convert all inputs to format[1] and SDC (Synopsis Design Constraint) format, and pass to synthesis tool 'Yosys'
-  Step3: Convert format[1] and SDC to format[2] and pass to timing tool 'OpenTimer'
-  Step4: Generate output report
+  
+   **Step1:** Create a demo called .vsdsynth and pass .csv from UNIX shell to TCL script.  
+   
+   **Step2:** Convert all inputs to format[1] and SDC (Synopsis Design Constraint) format, and pass to synthesis tool 'Yosys'.
+   
+   **Step3:** Convert format[1] and SDC to format[2] and pass to timing tool 'OpenTimer'.
+   
+   **Step4:** Generate output report
+   
+   Here format[1] is the way 'Yosys' needs / accepts for synthesis process and where as format[2] is a way 'OpenTimer' needs the information to process Timing Analysis.
 
 ### SubTask ONE: VSDSYNTH Toolbox Usage scenarios
 
