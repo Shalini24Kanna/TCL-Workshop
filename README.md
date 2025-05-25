@@ -74,16 +74,138 @@ In *scenario3* -help command to see user guide
 
 ### SubTask TWO: From CSV to format[1] and SDC - variable creation
 
+-	There are various tasks involved in format conversion
+
+     -	Identify the .csv file and create the variables to access the variables or paths 
+
+-	Check if directories and files mentioned in .csv exists or not
+
+      -	Netlist, output directories need to be verified. As this is User Interface, all user needed information should be listed in detail.
+
+-	Read “Constrains file” for above .csv and convert to SDC format which can be used for synthesis and PNR purpose. 
+
+-	Read all files in “Netlist Directory”
+
+-	Create main synthesis script in format[2]
+
+-	Pass the script to Yosys. 
+
+      - For any errors in here .log file can be referred. 
+
+#### Auto - Create variables using matrix and arrays 
+The main benefit of the Auto create is we don’t need need to be depend on the location mentioned in the .csv file. 
+It read the file into a matrix form and saves in a matrix ‘m’. Then the matrix ‘m’ can be used to form an array where the information from the .csv file is taken and here, the space between the words is removed. For converting .csv file to array, TCL command **lindex** is used. 
+ 
+
+The above-described process is shown as an example by taking the 1st values Design Name from the .csv file.
+ 
+
+
+Assign filename to the variable `$filename` so, it can be used every time when filename needs to be accessed. 
+
+	`set filename [lindex $argv 0]
+	package require csv
+	package require struct::matrix
+	struct::matrix m
+	set f [open $filename]
+	csv::read2matrix $f m , auto
+	close $f
+	set columns [m columns]
+	#m add columns $columns
+	m link my_arr
+	set num_of_rows [m rows]
+	set i 0`
+
+
+By using, above code, a variable is created, it will read the 1st column from .csv and assign the information from 2nd column. This process is direct form Design Name but when .csv file 2nd row is read, it shows, /outputdirectory as path for Output Directory Variable. 
+
+Here, the file location needs to be normalized. For that TCL command `file normalize $my_arr(1, $i)` is used. 
+This is needed to have an absolute path rather than a ~ character in the file path.
+The outcome of above code:
+
+ ![image](https://github.com/user-attachments/assets/305db919-7e76-48ca-a0b6-25d9696c8499)
+
 
 
 ### SubTask TWO: From CSV to format[1] and SDC - Processing constraints, CSV
 
+Now, the openMSP430_design_constraints.csv will be read and convert it into a matrix format then convert it into a SDC format. 
+Here, there are 3 section of constraints CLOCK, INPUT and OUTPUT. After converting the .csv file into matrix, obtain the number of rows and columns in the .csv file. For this, a complex matrix processing is used.
+
+	``
+
+Later, obtain row and column for each constrain – CLOCK, INPUT and OUTPUT as well.
+
+**LAB2**
+
+Command to run the `.vsdsynth` from vsdsyth folder (where the file exists) is as below:
+
+openMSP430_desing_details.csv is the input file for vsdsynth tool
+
+`./vsdsynth openMSP430_desing_details.csv`
+
+Variables Creation using TCL
+
+
+ ![image](https://github.com/user-attachments/assets/5e043efd-a942-4d1d-961f-b33bdf077307)
+
+
+Later, Remove the OutputDirectory by using the command `rm -rf outdir_openMAP430`
+
+
+ ![image](https://github.com/user-attachments/assets/9b49b5c4-784c-4ac3-856a-1a5fb0faf558)
+
+
+Now, when the script is executed again, as the output directory is removed, it should automatically create one. 
+
+
+![image](https://github.com/user-attachments/assets/3c14ceb8-0c5f-4815-a9ac-62df0262f964)
+
+ 
+
+The output directory is created back:
+
+
+![image](https://github.com/user-attachments/assets/14e8d77b-d306-46c7-b7e7-0420b28ef558)
+ 
+
+To observe how the error will occur, the Netlist Directory path from .csv file is edited as below. 
+
+
+![image](https://github.com/user-attachments/assets/af174390-abf8-4d7e-b38f-8bb09229248a)
+
+  
+
+Execute the script again to see below error:
+
+ ![image](https://github.com/user-attachments/assets/89ad8e20-337e-4bed-b715-966261aad6e0)
+
+
+Before proceeding to constraints.csv file, verify the directories and .lib files mentioned in the openMSP430_design_details.csv file are available or not. 
+
+ ![image](https://github.com/user-attachments/assets/1749e2a9-8ee8-40d8-9e6a-02261edf01f6)
+
+
+
+openMSP430_design_constraints.csv file 
+
+ ![image](https://github.com/user-attachments/assets/9e9094f1-7991-45b6-8a7a-b20168094973)
+
+
+Output for number of rows and columns of the constraints.csv file
+
+ ![image](https://github.com/user-attachments/assets/2ee45597-3b69-4d05-b192-ab2c7ffe0c08)
+
+
+Get the row and columns information for all CLOCK, INPUT and OUTPUT
+
+ ![image](https://github.com/user-attachments/assets/e10453a4-f9a4-4d00-9a59-1a18d6ff3d4d)
 
 
 ## 3. Day3 : Processing Clock anf Input Constraints
-### SubTask TWO: From CSV to format[1] and SDC - Preocessing clock constraints
+### SubTask TWO: From CSV to format[1] and SDC - Processing clock constraints
 
-### SubTask TWO: From CSV to format[1] and SDC - Preocessing input constraints
+### SubTask TWO: From CSV to format[1] and SDC - Processing input constraints
 
 ## 4. Day4 : Complete Scripting and YOSYS Synthesis Introduction
 ### Full Script download and Conclusion
