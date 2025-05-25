@@ -13,11 +13,12 @@ This repository contains all the information included in the VSD TCL Workshop. T
 
 
 ## 1. Day1 : Introduction to TCL and VSDSYNTH Toolbox Usage
-### Introduction to TCL and VSDSYNTH Toolbox Usage
+### Introduction
+#### Introduction to TCL and VSDSYNTH Toolbox Usage
  The main task of this workshop is to create a user interface (UI) to use excel file and create the output file 
  Here UI is the TCL box, which is `vsdsynth` for this workshop.
 
-### Introduction to Sub-Task
+#### Introduction to Sub-Task
 
 ### SubTask ONE: VSDSYNTH Toolbox Usage scenarios
 
