@@ -281,6 +281,106 @@ The process to obtain OUTPUTS constraints in SDC format is same as INPUTS constr
  
 ![image](https://github.com/user-attachments/assets/658ba704-bb66-495d-ba35-f4f6a02feb66)
 
+**LAB3**
+
+Making sure outdir_openMSP430 folder is empty, if any files are present remove them.
+
+![image](https://github.com/user-attachments/assets/5b08342f-26fd-4994-bb23-270b8446e49d)
+
+
+
+Clock constraints code output 
+
+![image](https://github.com/user-attachments/assets/ff814d37-58f6-4922-a12a-529c27b71abf)
+
+
+Run the script with complete clock constraints to SDC format. Now .sdc file is created in outdir_openMSP430 folder.
+
+![image](https://github.com/user-attachments/assets/f2ecd4e4-10fe-4c08-bb42-6dd684dca518)
+
+
+Open the Constraints file and check if the printed details in the SDC file are same as constraints .csv file information.
+
+
+![image](https://github.com/user-attachments/assets/f17d6fbb-00fc-45aa-9591-e4d984f011f0)
+
+
+List of the Verilog files
+
+
+![image](https://github.com/user-attachments/assets/b1cd1627-620e-48a2-a358-7e5818584f20)
+
+
+Obtained Pattern1 and Pattern2 for all input ports from all the Verilog files. 
+
+
+![image](https://github.com/user-attachments/assets/002e5e13-f80f-4bdd-8f6b-00c839f985ea)
+
+
+Replacing multiple spaces using the `grep` command
+
+![image](https://github.com/user-attachments/assets/8442b1b4-503b-41e7-9c16-c62e6ec66522)
+
+
+Grepping input ports and fixing spaces
+
+![image](https://github.com/user-attachments/assets/0217890c-f9e0-4405-ad76-9d461bad91a3)
+
+Grepping input ports with fixed spaces
+
+
+![image](https://github.com/user-attachments/assets/a04c5f5b-8288-460c-be28-5b00167d156d)
+
+Reading Input ports
+
+![image](https://github.com/user-attachments/assets/7cc1cef0-d0b1-4594-ab61-221a485e5018)
+
+
+Splitting Input ports
+
+![image](https://github.com/user-attachments/assets/418fc028-9cf7-4e3b-9976-65be249d555d)
+
+Uniquify and sort Input ports
+
+![image](https://github.com/user-attachments/assets/a1e53c65-c10f-4489-8318-ea529f3a9070)
+
+
+Join Input ports
+
+![image](https://github.com/user-attachments/assets/fc39d6ec-bfbe-498f-ba0a-0f2ecab1366d)
+
+Input port count
+
+![image](https://github.com/user-attachments/assets/56e63d4c-47f7-4907-8b65-e87f64856866)
+
+Input port grep to see ‘*’ for busses
+
+![image](https://github.com/user-attachments/assets/0d631885-fd6c-47df-9c1a-ae40e9c67ed8)
+
+All constraints got dumped into SDC file
+
+![image](https://github.com/user-attachments/assets/cb8abcfc-517a-4dcb-8470-1fd34a4a0bd4)
+
+
+Checking ‘*’ bussed input ports in SDC file
+
+![image](https://github.com/user-attachments/assets/156da82d-21ee-479e-b78b-e7ca7b47f76d)
+
+Re-verifying all bussed ports have ‘*’ 
+
+![image](https://github.com/user-attachments/assets/74de17f5-f1f2-4df7-b7a0-0b8481df51ba)
+
+
+Output Constraints in SDC format
+![image](https://github.com/user-attachments/assets/c587a3ba-f9e7-417f-a604-3ca2213b2aa6)
+
+Output Constraints 
+
+![image](https://github.com/user-attachments/assets/fb599791-5c1a-49fa-99a2-f40d25894589)
+
+
+
+
 
 
 
