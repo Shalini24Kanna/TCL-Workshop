@@ -132,7 +132,19 @@ The outcome of above code:
 Now, the openMSP430_design_constraints.csv will be read and convert it into a matrix format then convert it into a SDC format. 
 Here, there are 3 section of constraints CLOCK, INPUT and OUTPUT. After converting the .csv file into matrix, obtain the number of rows and columns in the .csv file. For this, a complex matrix processing is used.
 
-	``
+	`puts "\nInfo: Dumping SDC contraints file for $DesignName \n"
+	::struct::matrix constraints
+	set  chan [open $ConstraintsFile]
+	csv::read2matrix $chan constraints  , auto
+	close $chan
+	set number_of_rows [constraints rows]
+	puts "number_of_rows = $number_of_rows"
+	set number_of_columns [constraints columns]
+	puts "number_of_columns = $number_of_columns"`
+
+
+
+  
 
 Later, obtain row and column for each constrain – CLOCK, INPUT and OUTPUT as well.
 
