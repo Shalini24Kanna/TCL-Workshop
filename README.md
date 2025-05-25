@@ -33,7 +33,7 @@ As the input and desired output format are defined, The Top-Down approach is fol
    
    **Step4:** Generate output report
    
-   Here format[1] is the way 'Yosys' needs / accepts for synthesis process as yosys tool can not understand the csv file and where as format[2] is a way 'OpenTimer' needs the information to process Timing Analysis.
+   Here format[1] is the way 'Yosys' needs / accepts for synthesis process as yosys tool cannot understand the csv file and whereas format[2] is a way 'OpenTimer' needs the information to process Timing Analysis.
 
 ### SubTask ONE: VSDSYNTH Toolbox Usage scenarios 
 
@@ -42,10 +42,10 @@ As the input and desired output format are defined, The Top-Down approach is fol
 The first take is to create a `vsdsyth`, which will be the user interface tool. As this is UI, it needs to have all the information a User needs to use this TCL tool.
 To understand it in detail, it is seen in 3 different user scenarios.
 1.	When .csv file is not provided as an input.
-In this case, the user interface should understand the .csv file is missing and it should display an Error message “Please provide the .csv file”
+In this case, the user interface should understand the .csv file is missing, and it should display an Error message “Please provide the .csv file”
 2.	User provided a .csv file, which doesn’t exist.
-In this case, the .csv file is there but it might not be in the current working directory. The user interface should be able to understand it and display an Error message “Cannot find the .csv file”
-3.	Type “-help” to find out usage of the tool
+In this case, the .csv file is there but it might not be in the current working directory. The user interface should be able to understand it and display an Error message “Cannot find the .csv file”.
+3.	Type “-help” to find out usage of the tool.
 When User want to find the usage of the tool `vsdsynth` -help command should display the Usage information.
 
 Below is the .csv file as an Input
@@ -76,11 +76,11 @@ In *scenario3* -help command to see user guide
 
 ### SubTask TWO: From CSV to format[1] and SDC - variable creation
 
--	There are various tasks involved in format conversion
+-	There are various tasks involved in format conversion.
 
-     -	Identify the .csv file and create the variables to access the variables or paths 
+     -	Identify the .csv file and create the variables to access the variables or paths. 
 
--	Check if directories and files mentioned in .csv exists or not
+-	Check if directories and files mentioned in .csv exists or not.
 
       -	Netlist, output directories need to be verified. As this is User Interface, all user needed information should be listed in detail.
 
@@ -551,7 +551,48 @@ To run .tcl file directly from terminal we use a command
 
 ### read_sdc_proc - interpret IO delay and transition constraints
 
+Here, from proc_readSDC, IO delays and transition constraints are interpreted. 
+
+The arrival time of clock latency code conversion from SDC format to OpenTimer format, a Dummy port is used to reduce the runtime of SDC.
+
+If a portname doesn’t match it create a new portname which is a dummy, then it append a line then append a delay value.
+
+`Set_clock_latency` SDC to OpenTimer format convertion:
+-	Create a Dummy delay value and enter the delay list
+-	Get index number for “get_clocks”
+-	Initially old delay_vlaue is (null)
+o	Port_Index is 5
+o	New delay_value 150
+o	Old delay_value is 150
+o	Port_index is 5
+o	Then new delay_value 150 151 
+-	This loop keeps running till new delay_value gets 150 151 152 153 then it gets the port_name (dco_clk) and assign the value to it.
+-	Same process / loop is executed for lfxt_clk
+
+With same logic as above all other conversions occurs
+
+`set_clock_transition` conversion into slew constraint for OpenTimer
+
+`set_input_delay` converts into at (arrival time) constraint for OpenTimer
+
+`set_input_transition` converts into slew constraint for OpenTimer
+
+`set_output_delay` converts into delay constraint for OpenTimer
+
+`set_load` converts into load constraint for OpenTimer
+
+In /tmp/3, there is `*` for few constraints. So, to know how long it can be expanded as a bus bit-blast is performed.
+
+
+
+
 ### Process bussed ports and configuration file creation
+
+
+
+![image](https://github.com/user-attachments/assets/8c1212af-0893-4816-a4f5-c3abdb75e0d2)
+
+
 
 ### Quality of Results (QOR) generation algorithm
 
