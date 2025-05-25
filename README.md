@@ -493,8 +493,23 @@ Check log file as well for no errors
 ## 5. Day5 : Advanced Scripting Techniques and Quality of Results Generation
 ### Synthesis main file scripting and output file editing
 
+The main script for synthesis is created and then pass it to the Yosys tool.  Here again, we will also observe 2 cases: one when Hierarchy fails and one when Hierarchy pass and synthesis completes successfully. 
 
 ( **Step3:** Convert format[1] and SDC to format[2] and pass to timing tool 'OpenTimer'.)
+
+By now, we got the output of Yosys synthesis tool, but for OpenTimer (Static Timing Analysis) tool, the output netlist from Yosys format should be modified so that the data can be used for Timing analysis.
+
+To obtain the format[2], Yosys output file will be edited:
+1.	Remove any unnecessary lines from openMSP430.synth.v
+2.	Remove ‘*’ from openMSP430.synth.v
+3.	Remove ‘\’ from openMSP430.synth.v
+
+To know the word count of ‘*’, perform below code:
+`grep “*” outdir_openMSP430/openMSP430.synth.v | wc`
+
+To know the lines that don’t have ‘*’, perform below code:
+`grep -v -w “*” outdir_openMSP430/openMSP430.synth.v `
+
 
 ### World of 'Procs'
 
@@ -507,6 +522,49 @@ Check log file as well for no errors
 ### Quality of Results (QOR) generation algorithm
 
 (**Step4:** Generate output report)
+
+
+
+
+
+
+**LAB5**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### Conclusion
