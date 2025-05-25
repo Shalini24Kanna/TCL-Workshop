@@ -513,6 +513,24 @@ To know the lines that don’t have ‘*’, perform below code:
 
 ### World of 'Procs'
 
+**PROC** is an tcl file which is outside the mail tcl file, but it can be use with in main code.
+
+It is mainly helpful when there is need to use certain part of the code multiple times in the main code, we can make a ‘proc’ and use a single command to run the code within the ‘proc’ file.
+
+Here `set_multi_cpu_usage` is a ‘proc’ with an argument. When this part of code is needed, `set_multi_cpu_usage -localCPU 8` command runs the proc with in mail code.
+
+![image](https://github.com/user-attachments/assets/d8f1d213-3f97-40a9-a819-f1dcf7151485)
+
+In `vsdsynth.tcl` multiple procs are used while performing Static Timing Analysis – 
+
+`reopenStdout.proc` 
+`set_num_threads.proc`
+`read_lib.proc`
+`read_verilog.proc`
+`read_sdc.proc`
+
+
+
 ### read_sdc_proc - interpret clock generation constraints
 
 ### read_sdc_proc - interpret IO delay and transition constraints
@@ -530,6 +548,110 @@ To know the lines that don’t have ‘*’, perform below code:
 
 **LAB5**
 
+Main Script synthesis:
+Case1: no ERRORS
+
+![image](https://github.com/user-attachments/assets/14e99617-fe4b-4443-a421-dc206c6ff3dd)
+
+
+Synthesis log with no ERRORs:
+ 
+![image](https://github.com/user-attachments/assets/4a4cec57-666e-433d-92e9-9172fc0c296f)
+
+
+Case2: Change a module name in openMSP430.v file to see error in synthesis 
+
+ ![image](https://github.com/user-attachments/assets/afad280c-87d9-49e1-b0bc-12bbdc67716b)
+
+
+Synthesis log file with 1 ERROR:
+ 
+![image](https://github.com/user-attachments/assets/0f15fe06-8ec0-4a6c-9415-110a7386c00d)
+
+
+Same seen with `grep`
+
+ ![image](https://github.com/user-attachments/assets/9b4b0b04-c297-4dda-ba65-2a5c0561ec4b)
+
+
+Checking ‘*’ list in openMSP430.synth.v file
+
+ ![image](https://github.com/user-attachments/assets/6c2a8996-f66c-443f-8496-09edf8f84722)
+
+
+Number of ‘*’ in Yosys openMSP430.synth.v netlist
+
+ ![image](https://github.com/user-attachments/assets/ea03728f-7536-4530-8433-44555cb31f3b)
+
+
+Example of non ‘*’ lines from yosys openMSP430.synth.v 
+
+![image](https://github.com/user-attachments/assets/2e85484f-f60c-4e5e-9d9c-8cea8a950ac1)
+ 
+
+After editing yosys output file we get openMSP430.final.synth.v which can be given to OpenTimer:
+
+ ![image](https://github.com/user-attachments/assets/8b3700a7-462c-4ad7-b3ec-d708e3dc18a5)
+
+
+Below is the openMSP430.final.synth.v with no ‘*’ in the file
+ 
+![image](https://github.com/user-attachments/assets/abd1adfd-24ab-4f34-83c0-16ebc1adfec9)
+
+
+Comparing .synth.v file with .final.synth.v file
+ 
+![image](https://github.com/user-attachments/assets/bb497db4-5d93-499f-954f-19e51c2d13fe)
+
+
+Comparing end part of .synth.v file with .final.synth.v file
+ 
+![image](https://github.com/user-attachments/assets/d9545e9a-4177-45b0-b5a0-53f0b9494f03)
+
+
+Proc test file to check options
+
+![image](https://github.com/user-attachments/assets/53964835-30b7-4c82-aa44-80f803ee9686)
+ 
+
+Proc test file run tile 1st while statement
+ 
+![image](https://github.com/user-attachments/assets/6894175e-f32a-490a-89e3-03b02ad80259)
+
+
+Proc test file – run whole code
+
+![image](https://github.com/user-attachments/assets/47a5da82-0abb-4ae3-bebb-5f49dae22114)
+ 
+
+Run `./vsdsynth openMSP430_design_details.csv` for Static Timing Analysis.
+Here only using reopenStdout and set_num_threads procs
+ 
+![image](https://github.com/user-attachments/assets/1a8e9066-77ac-4a8d-85a7-f349b2d7abbb)
+
+
+Now .conf file is created in then Output Directory and the outcome is as below:
+ 
+![image](https://github.com/user-attachments/assets/dc7af6d3-384a-4d61-97c9-a1f8fbc7badf)
+
+
+We comment not required `puts` statements in the set_num_threads.procs and obtain desired output in .conf file
+
+ ![image](https://github.com/user-attachments/assets/1d15c7ed-4917-4af9-a6c0-0c4bba992f9e)
+
+
+Read_lib proc is executed within the code and .conf file is updated
+ 
+![image](https://github.com/user-attachments/assets/388ed05b-3c09-4ba9-89e7-dc5695c34794)
+
+
+If reopenStdout proc is not used, we are not having a screen lock of output
+ ![image](https://github.com/user-attachments/assets/c59f036f-3617-4462-972b-f20191d619a7)
+
+
+Read_verilog proc is executed within the code and .conf file is updated
+ 
+![image](https://github.com/user-attachments/assets/6e3b3512-6076-4874-a8aa-44fb5816f66d)
 
 
 
@@ -569,6 +691,6 @@ To know the lines that don’t have ‘*’, perform below code:
 
 ### Conclusion
  - The excel sheet is taken and processes using TCL book `vsdsynth` and obtained output in the desired format.
- - All tasks / modules are simulated and any errors seen while processing are resolved.
+ - All tasks / modules are simulated and if any errors seen while processing are resolved.
 ## 6. Acknowledgements
  - Kunal Ghosh, Co-founder (VSD Corp. Pvt. Ltd)
