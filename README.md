@@ -606,7 +606,7 @@ After executing proc_readSDC.tcl, busses ports are seen in`/tmp/3’ file but in
 
 `.conf` file is a master file to OpenTimer for it to understand .lib, .v, .timing, .spef files to process the timing analysis.
 
-`.spef` file is written with in`vsdsynth.tcl` to obtain `.conf` file. After executing the `./vsdsynth openMSP_desing_details.csv  observe` there are `.conf` and `.spef` files got created in output directory.
+`.spef` file is written with in`vsdsynth.tcl` to obtain `.conf` file. After executing the `./vsdsynth openMSP_desing_details.csv`  observe there are `.conf` and `.spef` files got created in output directory.
 
 
 
