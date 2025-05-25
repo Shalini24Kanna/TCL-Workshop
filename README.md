@@ -577,7 +577,7 @@ With same logic as above all other conversions occurs
 
 `set_input_transition` converts into slew constraint for OpenTimer
 
-`set_output_delay` converts into delay constraint for OpenTimer
+`set_output_delay` converts into rat (required arrival time) constraint for OpenTimer
 
 `set_load` converts into load constraint for OpenTimer
 
@@ -588,9 +588,25 @@ In /tmp/3, there is `*` for few constraints. So, to know how long it can be expa
 
 ### Process bussed ports and configuration file creation
 
+The Verilog netlist from openMSP430.final.synth.v is used to convert bussed ports into bit blasted ports (expanded bus). sdc_dirname and sdc_filename doesn’t change.
 
 
 ![image](https://github.com/user-attachments/assets/8c1212af-0893-4816-a4f5-c3abdb75e0d2)
+
+
+The main agenda of this part is to grep /tmp/3 constraints from the netlist (openMSP430.final.synth.v) and appending the value of the arrival times in the final timing.
+.timing file is created after this process.
+
+After arrival time constraints, bussed constraints converted to bit blasted. The same process is followed for slew constraints. 
+
+Then the same process is followed for output rat (required arrival time).
+
+After executing proc_readSDC.tcl, busses ports are seen in`/tmp/3’ file but in outdir_openMSP430/openMSP430.timing bit blasted ports are observed.
+
+
+`.conf` file is a master file to OpenTimer for it to understand .lib, .v, .timing, .spef files to process the timing analysis.
+
+`.spef` file is written with in`vsdsynth.tcl` to obtain `.conf` file. After executing the `./vsdsynth openMSP_desing_details.csv  observe` there are `.conf` and `.spef` files got created in output directory.
 
 
 
