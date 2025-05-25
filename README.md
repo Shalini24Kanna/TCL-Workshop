@@ -277,9 +277,7 @@ After obtaining the restricted search area,
 For File access and pattern creation, we use `globing`. It is for searching all .v files in the NetlistDirectory. Then create a new string `$Pattern2`which takes `$Patternt1`and splits and get fixed space string which is saved in a tmp file.
 
 
-The process to obtain OUTPUTS constraints in SDC format is same as INPUTS constraints. The only change is to modify the restricted search area as per the Output constraints in the constraints .csv file.
- 
-![image](https://github.com/user-attachments/assets/658ba704-bb66-495d-ba35-f4f6a02feb66)
+
 
 **LAB3**
 
@@ -371,6 +369,51 @@ Re-verifying all bussed ports have ‘*’
 ![image](https://github.com/user-attachments/assets/74de17f5-f1f2-4df7-b7a0-0b8481df51ba)
 
 
+
+## 4. Day4 : Complete Scripting and YOSYS Synthesis Introduction
+### Full Script download and Conclusion
+
+The process to obtain OUTPUTS constraints in SDC format is same as INPUTS constraints. The only change is to modify the restricted search area as per the Output constraints in the constraints .csv file.
+ 
+![image](https://github.com/user-attachments/assets/658ba704-bb66-495d-ba35-f4f6a02feb66)
+
+
+Now as all the constraints – CLOCK, INPUTS, OUTPUTS  - are converted to SDC format, date can be passed to synthesis Yosys tool.
+
+### Introduction to YOSYS synthesis tool usage
+
+To understand how this synthesis tool works, a memory module is taken and observed how synthesis tool works.
+
+A memory module code is written, and the RTL netlist of this module is passed to yosys tool for synthesis purpose, and we see a synthesized gate level block representation of the module.
+
+![image](https://github.com/user-attachments/assets/9c1c781e-2625-480b-a6a4-0fa1ffc24ec3)
+
+
+Rhombus shaped block represents a BUS.
+Here at first positive clock edge ‘write’ operation happens.
+
+![image](https://github.com/user-attachments/assets/76f3d093-9064-41bd-9a38-336be357afa0)
+
+
+And when second positive clock edge ‘read’ operation is performed.
+
+![image](https://github.com/user-attachments/assets/61b648ed-7b4e-4494-8fee-7d23f25157e3)
+
+
+As how Yosys works is understood, the openMSP430 design synthesis process can be performed.
+
+
+### Hierarchy check and error handling script creation for YOSYS
+
+A synthesis scrip – read Verilog netlist .v files and make a synthesized code (a gate level code) from the .csv file given. This process should be automated.
+
+Hierarchy will take all the inputs from .csv file and check is all the scripts needed are available or not. Then save all .v files from NetlsitDirectory to openMSP430.hier.ys in outdir_openMSP430/ directory.
+
+When `exec` is used in the code, it run the UNIX command from TCL Shell.
+
+
+**LAB4**
+
 Output Constraints in SDC format
 ![image](https://github.com/user-attachments/assets/c587a3ba-f9e7-417f-a604-3ca2213b2aa6)
 
@@ -379,18 +422,73 @@ Output Constraints
 ![image](https://github.com/user-attachments/assets/fb599791-5c1a-49fa-99a2-f40d25894589)
 
 
+Memory module .v and .ys files 
+
+![image](https://github.com/user-attachments/assets/39c06ba9-2a63-4c4e-af86-eb3aa8f265d5)
+
+
+Memory module given to yosys
+
+![image](https://github.com/user-attachments/assets/1b5d3b3f-6ebb-4439-9f0d-1576ccdd6757)
+
+Memory module synthesized
+
+![image](https://github.com/user-attachments/assets/bf89db3e-1bf2-45a8-a6d0-a381f31f328e)
+
+
+Memory module synthesized netlist
+
+![image](https://github.com/user-attachments/assets/14dd2f0b-b2bf-4623-b183-bae7991d734b)
+
+
+Hierarchy check script generated output
+
+![image](https://github.com/user-attachments/assets/4e0f38e3-38ad-4989-a273-26b684005f02)
+
+
+.hier.ys file in outdir_openMSP430/
+
+![image](https://github.com/user-attachments/assets/bcdf5d70-5e49-4696-a02d-33badb2d523b)
+
+
+Now, lets see how to do an error handling in Hierarchy check
+With no ERROR:
+
+![image](https://github.com/user-attachments/assets/f17b6f99-e94e-4506-80f4-6219f35b1f90)
+
+Creating an error by changing the openMSP430.v file
+
+![image](https://github.com/user-attachments/assets/37807606-9748-45b0-916b-78f6aae891ea)
+
+Now 1 Error is seen.
+
+![image](https://github.com/user-attachments/assets/cfa6f8bc-50d5-47e2-b877-8467d24a7af6)
+
+The same ERROR details are seen in the log file:
+
+![image](https://github.com/user-attachments/assets/8306ad6a-ed81-494e-9f56-2c449e561f13)
+
+
+Add few more Hierarchy check statements in .tcl file then re-run the script
+This is with 1 error 
+
+![image](https://github.com/user-attachments/assets/d44b7876-e608-435a-8603-6abb3f2209fd)
+
+Checking the log:
+
+![image](https://github.com/user-attachments/assets/f85b23ff-f408-4b2f-bd82-1966abb6095a)
 
 
 
+Now change the openMSP430.v to the original module name and check for 0 errors:
+
+![image](https://github.com/user-attachments/assets/d1f0f311-f2f7-4540-be02-9546e06dbfec)
+
+Check log file as well for no errors
+
+![image](https://github.com/user-attachments/assets/5d9f6e97-bb12-44b4-a3fc-d0fdbfce84ac)
 
 
-
-## 4. Day4 : Complete Scripting and YOSYS Synthesis Introduction
-### Full Script download and Conclusion
-
-### Introduction to YOSYS synthesis tool usage
-
-### Hierarchy check and error handling script creation for YOSYS
 
 ## 5. Day5 : Advanced Scripting Techniques and Quality of Results Generation
 ### Synthesis main file scripting and output file editing
