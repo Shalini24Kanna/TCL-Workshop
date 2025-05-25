@@ -535,6 +535,20 @@ In `vsdsynth.tcl` multiple procs are used while performing Static Timing Analysi
 
 ### read_sdc_proc - interpret clock generation constraints
 
+As read_sdc is a complecated part, the proc is converted to a .tcl file. This `proc_readSDC.tcl` will be executed in multiple parts, it helps in understanding each part of the `proc` in detail. 
+
+By using `proc_readSDC.tcl` a .timing file can be created, which further will be used for OpenTimer tool.
+
+Initially, the clock generation constraints will be observed.
+
+- Read SDC (openMSP430.sdc) file and get rid of the “[“ and “]”. For that, a sting mapping can be performed byt replacing “[“ with “” (null) and “]” with “ “ (space).
+- Evaluate clock period and clock port name from processes SDC: To create the clock constraints in OpenTimer format, open /tmp/1 in read mode and get a timing file as /tmp/3 in write mode. Then split and add space properly (single spaces). Next, find where both clocks are created and find the index numbers for each port.
+- Evaluate duty cycle and create clock in OpenTimer format : Duty cycle will be calculated by clock edge rise. 
+
+To run .tcl file directly from terminal we use a command
+
+	`tclsh proc_readSDC.tcl`
+
 ### read_sdc_proc - interpret IO delay and transition constraints
 
 ### Process bussed ports and configuration file creation
@@ -655,40 +669,110 @@ Read_verilog proc is executed within the code and .conf file is updated
  
 ![image](https://github.com/user-attachments/assets/6e3b3512-6076-4874-a8aa-44fb5816f66d)
 
+proc_readSDC till clock constraints output
+
+![image](https://github.com/user-attachments/assets/471bc432-7bc2-4d6f-b6f9-5f9a38288f35)
+
+![image](https://github.com/user-attachments/assets/b5f95c97-640e-4726-914b-a171078049ed)
+
+Output in /tmp/3
+
+ ![image](https://github.com/user-attachments/assets/87778cc1-79b5-48f3-ad9c-4a1d28630be8)
 
 
+Output in /tmp/1
+
+ ![image](https://github.com/user-attachments/assets/1e75b204-a7d1-467a-a3fd-0d72136c7b84)
 
 
+Set clock latency output in /tmp/3
+
+![image](https://github.com/user-attachments/assets/a03e2679-c784-4ae6-a2a3-58389b634145)
+ 
+
+Set clock latency output 
+ 
+![image](https://github.com/user-attachments/assets/41e4ea9e-553b-47a7-8382-ea1236a56ace)
 
 
+Slew constraints output in /tmp/3
+ 
+![image](https://github.com/user-attachments/assets/07bd7861-d62c-4e1b-bbbe-659bc5296137)
 
 
+Slew constraints output in /tmp/2
+ 
+![image](https://github.com/user-attachments/assets/922b661b-2a50-4da6-a45d-2a29741d5107)
 
 
+Set clock transition conversion to slew constraints
+ 
+![image](https://github.com/user-attachments/assets/824e00b7-7ba5-4f5b-b724-f39465758dac)
 
 
+Set input constraints output in /tmp/2
+ 
+![image](https://github.com/user-attachments/assets/b2b6576a-79d8-43e7-93eb-c7379354781e)
 
 
+Set input constraints output in /tmp/3
+ 
+![image](https://github.com/user-attachments/assets/9afed198-730c-4d17-b14c-ec11ba11da42)
 
 
+Set input delay output for proc_readSDC
+ 
+![image](https://github.com/user-attachments/assets/4651b0cb-d551-41f8-b10e-cf76d1b0bb49)
 
 
+Set input transitions output for proc_readSDC 
+
+ ![image](https://github.com/user-attachments/assets/f1661ad2-b14f-4f65-a544-5ada8a9c59f4)
 
 
+Set output constraints output for proc_readSDC in /tmp/3
+ 
+![image](https://github.com/user-attachments/assets/8202ddfa-788f-411e-945b-342d2926cc47)
 
 
+proc_readSDC bussed ports to bit blasted 
+ 
+![image](https://github.com/user-attachments/assets/0d950e86-7ead-419c-b071-40a45c2263f5)
 
 
+Timing file for bit blasted ports
+ 
+![image](https://github.com/user-attachments/assets/f147caf9-1284-40b7-b052-62173272e055)
 
 
+.spef and .conf file creation for `./vsdsynth openMSP430_desing_details.csv`
+ 
+![image](https://github.com/user-attachments/assets/66dee05f-55f6-458a-9075-8cb9fa3c7a58)
 
 
+.spef File 
+ 
+![image](https://github.com/user-attachments/assets/76245533-bce3-4ca2-93e9-2c69e54a9fee)
 
 
+.conf file 
+ 
+![image](https://github.com/user-attachments/assets/6a0bf076-0059-4624-9295-06e713fd255a)
 
 
+Pre-Layout Timing Results in Vertical Format
+ 
+![image](https://github.com/user-attachments/assets/a3bbe141-5f15-440c-b758-7f09464dad2f)
 
 
+Pre-Layout Timing Results in Horizontal Format
+ 
+![image](https://github.com/user-attachments/assets/6041e8e7-5a47-444b-a8fd-da8c8046ce65)
+
+
+Pre-Layout Timing Results in Horizontal Format when extra set statements are added to Instance_count and WNS Hold
+ 
+![image](https://github.com/user-attachments/assets/8fcf39f8-1e7c-4ac9-bbbc-28e059579ba0)
 
 
 ### Conclusion
