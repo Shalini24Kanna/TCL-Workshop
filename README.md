@@ -31,7 +31,7 @@ As the input and desired output format are defined, The Top-Down approach is fol
    
    **Step4:** Generate output report
    
-   Here format[1] is the way 'Yosys' needs / accepts for synthesis process and where as format[2] is a way 'OpenTimer' needs the information to process Timing Analysis.
+   Here format[1] is the way 'Yosys' needs / accepts for synthesis process as yosys tool can not understand the csv file and where as format[2] is a way 'OpenTimer' needs the information to process Timing Analysis.
 
 ### SubTask ONE: VSDSYNTH Toolbox Usage scenarios
 
