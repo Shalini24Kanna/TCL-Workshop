@@ -614,8 +614,23 @@ After executing proc_readSDC.tcl, busses ports are seen in`/tmp/3’ file but in
 
 (**Step4:** Generate output report)
 
+When Static Timing Analysis is performed, `$DesignName.results` file is created, where it stores the log and results. It takes `.conf` as an input for OpenTimer to perform STA. 
 
+As `time` command records the time taken for run timer in microseconds, for the desired results, it is converted into seconds.
 
+WNS RAT (Worst Negative Slack of Required Arrival Time) will be reported in ‘ns’ in results. To obtain this, look for the first RAT value in `$DesignName.results`. OpenTimer puts the worst RAT violation at the top.
+
+To get Failing End Points (FEP) RAT value, get the count for number of RAT violations occurred.
+
+The same logic is used to get WNS & FEP for setup and hold. If no violations `-` is printed at the output.
+
+Instance count determines the size of the design; it depends on things like the number of gates and size.
+
+The results of the PRE-LAYOUT TIMING REPORT are achieved. To display the results in vertical format, just write puts statements to show respective results. 
+
+If the results are to be displayed in Horizontal format, a format string is added, %s represents a string and 15 is the space. $formatStr is a string identifier. With the help of formatStr, the results of Pre-layout timing report are displayed in the datasheet format.
+
+Later, to observe how the output is shown if there are 2 word / results, set statements are added for Instance_count and WNS hold and observed the difference in output representation. Two rows are taken to display the information.
 
 
 
